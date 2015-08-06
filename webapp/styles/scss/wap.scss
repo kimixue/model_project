@@ -1,0 +1,119 @@
+/************************************************************
+* Project:         webapp
+* Author:          KIMI
+* Date:            2014-08-07
+* Desc:
+* Copyright:       NetEase.com Inc. All rights reserved.
+************************************************************/
+/**
+ * 消除transition闪屏
+ * .css{
+ *  设置内嵌的元素在 3D 空间如何呈现：保留 3D
+ *  -webkit-transform-style: preserve-3d;
+ * （设置进行转换的元素的背面在面对用户时是否可见：隐藏）
+ *   -webkit-backface-visibility: hidden;
+ * }
+ * 开启硬件加速
+ * 解决页面闪白
+ * 保证动画流畅
+ * .css {
+ *  -webkit-transform: translate3d(0, 0, 0);
+ *  -moz-transform: translate3d(0, 0, 0);
+ *  -ms-transform: translate3d(0, 0, 0);
+ *  transform: translate3d(0, 0, 0);
+ *}
+ *设计高性能CSS3动画的几个要素: 尽可能地使用合成属性transform和opacity来设计CSS3动画  不使用position的left和top来定位  利用translate3D开启GPU加速
+ *
+ *
+ * 手机拍照和上传图片
+ * <input type="file">的accept 属性
+ * <!-- 选择照片 -->
+ * <input type=file accept="image/*">
+ * <!-- 选择视频 -->
+ * <input type=file accept="video/*">
+ * 使用总结：ios 有拍照、录像、选取本地图片功能    部分android只有选取本地图片功能  winphone不支持  input控件默认外观丑陋
+ *
+ *
+ * 摇一摇功能
+ * HTML5 deviceMotion：封装了运动传感器数据的事件，可以获取手机运动状态下的运动加速度等数据
+ *
+ *
+ * audio元素和video元素在ios和andriod中无法自动播放
+ * 应对方案：触屏即播
+ * $('html').one('touchstart',function(){
+ *  audio.play()
+ * })
+ *
+ *
+ * 屏幕旋转的事件和样式
+ * 事件 window.orientation，取值：正负90表示横屏模式、0和180表现为竖屏模式；
+ * window.onorientationchange = function(){
+ *           switch(window.orientation){
+ *              case -90:
+ *               case 90:
+ *               alert("横屏:" + window.orientation);
+ *               case 0:
+ *               case 180:
+ *               alert("竖屏:" + window.orientation);
+ *               break;
+ *          }
+ * } 
+ * 样式
+ * //竖屏时使用的样式
+ *	@media all and (orientation:portrait) {
+ *	    .css{}
+ *	}
+ *	//横屏时使用的样式
+ * 	@media all and (orientation:landscape) {
+ *	    .css{}
+ *	}
+ *
+ * 模拟按钮hover效果
+ * <script type="text/javascript">
+ *		var btnBlue = document.querySelector(".btn-blue");
+ *		btnBlue.ontouchstart = function(){
+ *		    this.className = "btn-blue btn-blue-on"
+ *		}
+ *		btnBlue.ontouchend = function(){
+ *		    this.className = "btn-blue"
+ *		}
+ *	</script>
+ **/
+a,button,input,textarea{
+	-webkit-tap-highlight-color: rgba(0,0,0,0;);
+	-webkit-tap-highlight-color: rgba(0,0,0,0;)
+    -webkit-user-modify:read-write-plaintext-only; 
+}     
+//ios系统中元素被触摸时产生的半透明灰色遮罩怎么去掉   部分android系统中元素被点击时产生的边框怎么去掉
+//对于按钮类还有个办法，不使用a或者input标签，直接用div标签
+input::-webkit-input-placeholder{color:#AAAAAA;}
+input:focus::-webkit-input-placeholder{color:#EEEEEE;}
+//webkit表单输入框placeholder的颜色值能改变么
+input::-webkit-input-speech-button {display: none}
+//android 上去掉语音输入按钮
+html {
+	-webkit-text-size-adjust: 100%;
+}
+//当移动设备横竖屏切换时，文本的大小会重新计算，进行相应的缩放，当我们不需要这种情况时，可以选择禁止
+html {
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+//在做移动端页面时，会发现所有a标签在触发点击时或者所有设置了伪类 :active 的元素，默认都会在激活状态时，显示高亮框，如果不想要这个高亮，那么你可以通过css以下方法来进行全局的禁止
+//但这个方法在三星的机子上无效，有一种妥协的方法是把页面非真实跳转链接的a标签换成其它标签，可以解决这个问题
+input,
+textarea {
+　　border: 0; /* 方法1 */
+　　-webkit-appearance: none; /* 方法2 */
+}
+//在iOS上，输入框默认有内部阴影，但无法使用 box-shadow 来清除，如果不需要阴影，可以这样关闭
+.user-select-none {
+  -webkit-user-select: none;  /* Chrome all / Safari all */
+  -moz-user-select: none;     /* Firefox all （移动端不需要） */
+  -ms-user-select: none;      /* IE 10+ */      
+}
+//如果你不想用户可以选中页面中的内容，那么你可以在css中禁掉
+img { -webkit-touch-callout: none; }
+//如何禁止保存或拷贝图像（IOS）
+
+//移动端定义字体的代码 
+body{font-family:Helvetica;}

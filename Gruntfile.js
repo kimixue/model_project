@@ -6,7 +6,7 @@ module.exports = function(grunt) {
       options: {
         port: 9000,
         hostname: '10.240.138.72', //默认就是这个值，可配置为本机某个 IP，localhost 或域名
-        livereload: 35731  //声明给 watch 监听的端口
+        livereload: 35732  //声明给 watch 监听的端口
       },
       server: {
         options: {
@@ -19,9 +19,13 @@ module.exports = function(grunt) {
       
     },
     sass: {
-       dist: {
+        dist: {
+            options: {                       // Target options 
+            style: 'expanded'
+          },
           files: { 
-            "webapp/styles/css/index.css": "webapp/styles/scss/index.scss"
+            "webapp/styles/css/index.css":"webapp/styles/scss/index.scss",
+            "webapp/styles/css/wap.css":"webapp/styles/scss/wap.scss"
           }
        }
     },
